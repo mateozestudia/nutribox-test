@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NutriBox · Página de prueba del Data Layer</title>
+<!-- Contenedor de GTM: GTM-PZDVJ67T (head y body). -->
+<script>window.dataLayer = window.dataLayer || [];
+// Variables personalizadas: se inyectan al cargar la página (origen desde utm_source; usuario simulado)
+(function(){
+  var p = new URLSearchParams(location.search), s = (p.get('utm_source')||'').toLowerCase();
+  var map = {facebook:'paid_meta', meta:'paid_meta', instagram:'paid_meta', google:'paid_google', email:'email'};
+  window.dataLayer.push({
+    origen_trafico: map[s] || (document.referrer ? 'organico' : 'directo'),
+    tipo_usuario: 'suscriptor_premium',
+    valor_cliente_estimado: 360.00
+  });
+})();</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PZDVJ67T');</script>
+<style>body{font-family:Arial,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;color:#1F2937}
+button{background:#2F7D5A;color:#fff;border:0;border-radius:8px;padding:12px 18px;margin:6px 6px 6px 0;font-size:15px;cursor:pointer}
+button.o{background:#E98A4E}h1{color:#1E5A3F}small{color:#6B7280}</style></head>
+<body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZDVJ67T" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<h1>NutriBox · prueba del Data Layer</h1>
+<p>Cada botón dispara un evento con la estructura de la Pre-entrega 8. Usalo con la Vista previa de GTM y DebugView.</p>
+<button id="b-view">Ver Menú Semanal (view_item)</button>
+<button id="b-cart">Agregar al carrito (add_to_cart)</button>
+<button id="b-lead" class="o">Pedir recetas de muestra (generate_lead)</button>
+<button id="b-lead-b2b" class="o">Consulta empresas (generate_lead B2B)</button>
+<button id="b-buy">Confirmar compra (purchase)</button>
+<p><small>Página de prueba: no procesa pagos ni envía datos personales.</small></p>
+<script>
+var ITEM={item_id:'NBX-001',item_name:'Menú Semanal',item_category:'caja_menu_semanal',price:45.00,quantity:1};
+function ecom(name,extra){dataLayer.push({ecommerce:null});dataLayer.push(Object.assign({event:name,categoria_producto:'caja_menu_semanal'},{ecommerce:extra}));}
+document.getElementById('b-view').onclick=function(){ecom('view_item',{currency:'USD',value:45.00,items:[ITEM]});};
+document.getElementById('b-cart').onclick=function(){ecom('add_to_cart',{currency:'USD',value:45.00,items:[ITEM]});};
+document.getElementById('b-lead').onclick=function(){dataLayer.push({event:'generate_lead',lead_type:'recetas_muestra',value:3.60,currency:'USD'});};
+document.getElementById('b-lead-b2b').onclick=function(){dataLayer.push({event:'generate_lead',lead_type:'consulta_empresas',value:27.00,currency:'USD'});};
+document.getElementById('b-buy').onclick=function(){ecom('purchase',{transaction_id:'NBX-ORD-'+Date.now(),currency:'USD',value:45.00,items:[ITEM]});};
+</script></body></html>
